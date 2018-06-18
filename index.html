@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Project 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/scripts/reset.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Andrew Babb</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav navbar-right">
+                    <li class="nav-item active">
+                        <a class="nav-link ml-auto" id="loginHere" href="#">Login<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="loggedInUser" href="#">Logged In User</a>
+                    </li>
+                  </ul>
+                </div>
+            </nav>
+            
+        <br>
+        
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="row">
+                            <h1>About Me</h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                               <img src="http://placehold.it/150x150" class="img-thumbnail">
+                                </div>
+                                <div class="col-md-9 mt-3 mb-3">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Panel
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Card Title</h5>
+                                <h6 class="card-subtitle">Card Subtitle</h6>
+                                <p class="card-text">laurel, the skinny sidebar information"</p>
+                            </div>
+                               
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase-auth.js"></script> -->
+
+    <script type="text/javascript">
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBcV1kqAcsyalZDr6rPk6N6w2Ptt72Nwa4",
+            authDomain: "loginuserauthtest.firebaseapp.com",
+            databaseURL: "https://loginuserauthtest.firebaseio.com",
+            projectId: "loginuserauthtest",
+            storageBucket: "",
+            messagingSenderId: "440397246299"
+        };
+        
+        firebase.initializeApp(config);
+
+        var database = firebase.database();
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        $("#loginHere").on("click", function(event) {
+
+                console.log("login clicked");
+
+                firebase.auth().signInWithPopup(provider).then(function(result) {
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    var token = result.credential.accessToken;
+                    // The signed-in user info.
+                    var user = result.user;
+                    console.log("user: " + user);
+                    // ...
+                }).catch(function(error) {
+
+                    console.log("hitting error");
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    console.log("errorcode: " + errorCode + " errormessage: " + errorMessage + " email: " + email + " credential: " + credential);
+                    // ...
+                });
+
+        });
+
+
+    </script>
+
+</body>
