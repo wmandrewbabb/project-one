@@ -126,7 +126,7 @@
                     uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
                                     // this value to authenticate with your backend server, if
                                     // you have one. Use User.getToken() instead.
-                    console.log("name: " + name + " email: " + email + " photoUrl: " + photoURL + " verified: " + emailVerified + " uid: " + uid );
+                    console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
                     var userRef = firebase.database().ref("users/" + uid);
                     userRef.update({
                             name: name,
