@@ -116,6 +116,7 @@
 
                 var user = firebase.auth().currentUser;
                 var name, email, photoUrl, uid, emailVerified;
+                photoUrl = "blank";
 
                 if (user != null) {
                     name = user.displayName;
