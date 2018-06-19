@@ -116,9 +116,10 @@
 
                 var user = firebase.auth().currentUser;
                 var name, email, photoUrl, uid, emailVerified;
-                photoUrl = "blank";
+                // photoUrl = "blank";
 
                 if (user != null) {
+
                     name = user.displayName;
                     email = user.email;
                     photoUrl = user.photoURL;
@@ -127,13 +128,21 @@
                                     // this value to authenticate with your backend server, if
                                     // you have one. Use User.getToken() instead.
                     console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
-                    var userRef = firebase.database().ref("users/" + uid);
-                    userRef.update({
-                            name: name,
-                            email: email,
-                            food: "hamburgers",
-                            userid: uid
-                          });
+                    var userRef = firebase.database().ref("users/" + uid).then(function(response) {
+                        
+                        if (!userRef.firstLogin) {
+                             userRef.update({
+                                name: name,
+                                email: email,
+                                food: "pizzas",
+                                userid: uid,
+                                firstLogin: false
+                            });
+                        }
+
+                    });
+
+                    $('#loggedInUser').text(email);
 
                 }
 
