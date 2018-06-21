@@ -38,11 +38,11 @@
         <br>
             <div class="container">
                     <div class="row">
-                            <div class="input-group mb-3 col-md-3">
+                            <div class="input-group mb-3 col-lg-3 col-md-6 col-xs-12">
                                 <div class="input-group-prepend">
                                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cuisines</button>
                                 <div class="dropdown-menu" id="eatDrop" >
-                                    <a class="dropdown-item" href="#"><span>Italian</a>
+                                    <a class="dropdown-item" href="#"><span>Italian</span></a>
                                     <a class="dropdown-item" href="#"><span>Mexican</span></a>
                                     <a class="dropdown-item" href="#"><span>Chinese</span></a>
                                     <a class="dropdown-item" href="#"><span>American</span></a>
@@ -56,8 +56,38 @@
                                     <a class="dropdown-item" href="#"><span>Indian</span></a>
                                 </div>
                                 </div>
-                                <input type="text" class="form-control" id="quisineType" aria-label="Text input with dropdown button">
+                                <input type="text" class="form-control" id="quisineType" placeholder="Surprise Me" aria-label="Text input with dropdown button">
                             </div>
+                            <div class="input-group mb-3 col-lg-3 col-md-6 col-xs-12">
+                                <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cost</button>
+                                <div class="dropdown-menu" id="priceDrop" >
+                                    <a class="dropdown-item" href="#"><span>Cheap</span></a>
+                                    <a class="dropdown-item" href="#"><span>Moderate</span></a>
+                                    <a class="dropdown-item" href="#"><span>A Good Time</span></a>
+                                    <a class="dropdown-item" href="#"><span>A REALLY Good Time</span></a>
+                                </div>
+                                </div>
+                                <input class="form-control" id="priceType" placeholder="----" aria-label="Text input with dropdown button">
+                            </div>
+                            <div class="input-group mb-3 col-lg-3 col-md-6 col-xs-12">
+                                <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Distance</button>
+                                <div class="dropdown-menu" id="rangeDrop" >
+                                    <a class="dropdown-item" href="#"><span>A few minutes away</span></a>
+                                    <a class="dropdown-item" href="#"><span>A short drive</span></a>
+                                    <a class="dropdown-item" href="#"><span>Somewhere in town</span></a>
+                                    <a class="dropdown-item" href="#"><span>A half hour or more</span></a>
+                                </div>
+                                </div>
+                                <input class="form-control" id="rangeType" placeholder="--" aria-label="Text input with dropdown button">
+                            </div>
+                            <div class="input-group mb-3 col-lg-3 col-md-6 col-xs-12">
+                                    <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Zip Code</button>
+                                    </div>
+                                    <input class="form-control zipcode" id="zipInput" placeholder="XXXXX" aria-label="Text input with dropdown button">
+                                </div>
                         </div>
                 <div class="row">
                     <div class="col-md-8">
@@ -201,10 +231,45 @@
             $('#quisineType').val(poodle);
             console.log(this);
             console.log($(this).children('span').text());
-            // var passValue = $(this).attr('value');
-            // $('#quisineType').attr('dataValue', passValue);
         });
 
+        $(document).on('click', '#priceDrop a', function() {
+            var poodle = $(this).children('span').text();
+            $('#priceType').val(poodle);
+            console.log(this);
+            console.log($(this).children('span').text());
+        });
+
+        $(document).on('click', '#rangeDrop a', function() {
+            var poodle = $(this).children('span').text();
+            $('#rangeType').val(poodle);
+            console.log(this);
+            console.log($(this).children('span').text());
+        });
+
+
+        jQuery.validator.addMethod("zipcode", function(value, element) {
+            return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
+        }, "Please provide a valid zipcode.");
+
+        $().ready(function () {
+
+
+        $("#zipInput").validate({
+            rules: {
+                'Address.PostalCode': {
+                    required: true,
+                    zipcode: true,
+                },
+            },
+            messages: {
+                'Address.PostaleCode' : 'Enter a Valid ZIP'
+                }
+        });
+        
+
+
+        });
     </script>
 
 </body>
