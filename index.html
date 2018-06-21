@@ -36,8 +36,29 @@
             </nav>
             
         <br>
-        
             <div class="container">
+                    <div class="row">
+                            <div class="input-group mb-3 col-md-3">
+                                <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cuisines</button>
+                                <div class="dropdown-menu" id="eatDrop" >
+                                    <a class="dropdown-item" href="#"><span>Italian</a>
+                                    <a class="dropdown-item" href="#"><span>Mexican</span></a>
+                                    <a class="dropdown-item" href="#"><span>Chinese</span></a>
+                                    <a class="dropdown-item" href="#"><span>American</span></a>
+                                    <a class="dropdown-item" href="#"><span>Pizza</span></a>
+                                    <a class="dropdown-item" href="#"><span>Burgers</span></a>
+                                    <a class="dropdown-item" href="#"><span>Japanese</span></a>
+                                    <a class="dropdown-item" href="#"><span>Seafood</span></a>
+                                    <a class="dropdown-item" href="#"><span>Vegetarian</span></a>
+                                    <a class="dropdown-item" href="#"><span>Bar</span></a>
+                                    <a class="dropdown-item" href="#"><span>BBQ</span></a>
+                                    <a class="dropdown-item" href="#"><span>Indian</span></a>
+                                </div>
+                                </div>
+                                <input type="text" class="form-control" id="quisineType" aria-label="Text input with dropdown button">
+                            </div>
+                        </div>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row">
@@ -70,6 +91,7 @@
             </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
     
@@ -173,6 +195,15 @@
             }
         });
 
+
+        $(document).on('click', '#eatDrop a', function() {
+            var poodle = $(this).children('span').text();
+            $('#quisineType').val(poodle);
+            console.log(this);
+            console.log($(this).children('span').text());
+            // var passValue = $(this).attr('value');
+            // $('#quisineType').attr('dataValue', passValue);
+        });
 
     </script>
 
