@@ -245,24 +245,24 @@
         });
 
 
-        jQuery.validator.addMethod("zipcode", function(value, element) {
-            return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
-        }, "Please provide a valid zipcode.");
+        // jQuery.validator.addMethod("zipcode", function(value, element) {
+        //     return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
+        // }, "Please provide a valid zipcode.");
 
-        $().ready(function () {
+        // $().ready(function () {
 
 
-        $("#zipInput").validate({
-            rules: {
-                'Address.PostalCode': {
-                    required: true,
-                    zipcode: true,
-                },
-            },
-            messages: {
-                'Address.PostaleCode' : 'Enter a Valid ZIP'
-                }
-        });
+        // $("#zipInput").validate({
+        //     rules: {
+        //         'Address.PostalCode': {
+        //             required: true,
+        //             zipcode: true,
+        //         },
+        //     },
+        //     messages: {
+        //         'Address.PostaleCode' : 'Enter a Valid ZIP'
+        //         }
+        // });
         
 
 
