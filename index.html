@@ -12,31 +12,42 @@
     #loggedInUser {
         display: none;
     }
+
+    .jumbotron-fluid{
+        min-width: 100%;
+    }
 </style>
 </head>
 
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Andrew Babb</a>
+        <a class="navbar-brand" href="#">   </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
               
-                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <div class="navbar-nav navbar-right ml-auto justify-content-end" id="navbarSupportedContent">
                   <ul class="navbar-nav navbar-right">
                     <li class="nav-item active">
                         <a class="nav-link ml-auto" id="loginHere" href="#"><i class="fas fa-user-plus"></i> Login<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="loggedInUser" href="#"><i class="fas fa-user-circle"></i>Logged In User</a>
+                        <a class="nav-link" id="loggedInUser" href="#"><i class="fas fa-user-circle"></i>Logged In User<i id="signOutButton" class="fas fa-sign-out-alt"></i>
+                        </a>
                     </li>
                   </ul>
                 </div>
             </nav>
-            
-        <br>
             <div class="container">
+                <div class="row">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4">Dungeons and Dinners</h1>
+                            <p class="lead">Slay indecisive dining, find local food you haven't tried.</p>
+                        </div>
+                    </div>
+                </div>
                     <div class="row">
                             <div class="input-group mb-3 col-lg-3 col-md-6 col-xs-12">
                                 <div class="input-group-prepend">
@@ -90,32 +101,6 @@
                                 </div>
                         </div>
                 <div class="row">
-                    <div class="col-md-8">
-                        <div class="row">
-                            <h1>About Me</h1>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                               <img src="http://placehold.it/150x150" class="img-thumbnail">
-                                </div>
-                                <div class="col-md-9 mt-3 mb-3">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header">
-                                Panel
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Card Title</h5>
-                                <h6 class="card-subtitle">Card Subtitle</h6>
-                                <p class="card-text">laurel, the skinny sidebar information"</p>
-                            </div>
-                               
-                        </div>
-                    </div>
                 </div>
         
             </div>
@@ -169,6 +154,18 @@
                     console.log("errorcode: " + errorCode + " errormessage: " + errorMessage + " email: " + email + " credential: " + credential);
                     // ...
                 });
+
+        });
+
+        $("#signOutButton").on("click", function(event) {
+
+            console.log("signout clicked");
+
+            firebase.auth().signOut().then(function() {
+                console.log("Signed-out"); //Sign-out successful.
+            }).catch(function(error) {
+                console.log("Error trying to sign out"); // An error happened.
+            });
 
         });
 
