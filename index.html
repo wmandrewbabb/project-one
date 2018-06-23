@@ -16,6 +16,10 @@
     .jumbotron-fluid{
         min-width: 100%;
     }
+
+    #signOutButton {
+        display: none;
+    }
 </style>
 </head>
 
@@ -33,7 +37,10 @@
                         <a class="nav-link ml-auto" id="loginHere" href="#"><i class="fas fa-user-plus"></i> Login<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item" id="userLoggedIn">
-                        <a class="nav-link" id="loggedInUser" href="#"><i class="fas fa-user-circle"></i>Logged In User</a><i id="signOutButton" class="fas fa-sign-out-alt"></i>
+                        <a class="nav-link" id="loggedInUser" href="#"><i class="fas fa-user-circle"></i>Logged In User</a>
+                    </li>
+                    <li class="nav-item" id="signOutButton">
+                        <a class="nav-link" href="#"><i id="signOutButton" class="fas fa-sign-out-alt"></i></a>
                     </li>
                   </ul>
                 </div>
@@ -209,6 +216,7 @@
 
 
                     $('#userLoggedIn').show();
+                    $('#signOutButton').show();
                     $('#loggedInUser').html('<i class="fas fa-user-circle"></i> ' + email);
                     $("#loginHere").hide();
 
@@ -218,14 +226,10 @@
                 // User is signed in.
             } else {
 
-                    name = "";
-                    email = "";
-                    photoUrl = "";
-                    emailVerified = "";
-                    uid = "";  
-
                     $("#loginHere").show();
-                    4("#userLoggedIn").hide();
+                    $('#loggedInUser').html('');
+                    $("#userLoggedIn").hide();
+                    $("#signOutButton").hide();
 
                 // No user is signed in.
             }
