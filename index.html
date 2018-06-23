@@ -33,8 +33,7 @@
                         <a class="nav-link ml-auto" id="loginHere" href="#"><i class="fas fa-user-plus"></i> Login<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="loggedInUser" href="#"><i class="fas fa-user-circle"></i>Logged In User<i id="signOutButton" class="fas fa-sign-out-alt"></i>
-                        </a>
+                        <a class="nav-link" id="loggedInUser" href="#"><i class="fas fa-user-circle"></i>Logged In User</a><i id="signOutButton" class="fas fa-sign-out-alt"></i>
                     </li>
                   </ul>
                 </div>
@@ -210,7 +209,7 @@
 
 
                     $('#loggedInUser').show();
-                    $('#loggedInUser').html('<i class="fas fa-user-circle"></i> ' + email + ' <i id="signOutButton" class="fas fa-sign-out-alt"></i>');
+                    $('#loggedInUser').html('<i class="fas fa-user-circle"></i> ' + email + ' </a><i id="signOutButton" class="fas fa-sign-out-alt"></i>');
                     $("#loginHere").hide();
 
                 }
