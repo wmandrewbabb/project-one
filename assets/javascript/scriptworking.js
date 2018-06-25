@@ -1,11 +1,14 @@
+$(document).ready(function() {
+
+
 var config = {
-    apiKey: "AIzaSyDIJxOczwNeRzwdUa96kJDtO0AQ48hX8m0",
-    authDomain: "dungeonsanddinners.firebaseapp.com",
-    databaseURL: "https://dungeonsanddinners.firebaseio.com",
-    projectId: "dungeonsanddinners",
-    storageBucket: "dungeonsanddinners.appspot.com",
-    messagingSenderId: "395732337799"
-  };
+    apiKey: "AIzaSyBcV1kqAcsyalZDr6rPk6N6w2Ptt72Nwa4",
+    authDomain: "loginuserauthtest.firebaseapp.com",
+    databaseURL: "https://loginuserauthtest.firebaseio.com",
+    projectId: "loginuserauthtest",
+    storageBucket: "",
+    messagingSenderId: "440397246299"
+};
 
 firebase.initializeApp(config);
 
@@ -16,7 +19,7 @@ var provider = new firebase.auth.GoogleAuthProvider();
 var globalUID = ""; 
 var userLoggedIn = false;
 var favoritesShowing = false;
-var favoritesLocal = []; 
+var favoritesLocal =  
 
 $("#loginHere").on("click", function(event) {
 
@@ -88,6 +91,8 @@ if (user) {
         console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
         var userRef = firebase.database().ref("users/" + uid);
         globalUID = userRef;
+        favoritesLocal = globalUID.val().favoritesListDB;
+        
         console.log("globalUID" + globalUID);
             
             if (!userRef.firstLogin) {
@@ -101,8 +106,8 @@ if (user) {
             }
 
 
-        $('#userLoggedIn').show();
-        $('#signOutButton').show();
+        $('#userLoggedIn').css('display','inline');
+        $('#signOutButton').css('display','inline');
         $('#loggedInUser').html('<i class="fas fa-user-circle"></i> ' + email);
         $("#loginHere").hide();
 
@@ -112,7 +117,7 @@ if (user) {
     // User is signed in.
 } else {
 
-        $("#loginHere").show();
+        $("#loginHere").css('display','inline');
         $('#loggedInUser').html('');
         $("#userLoggedIn").hide();
         $("#signOutButton").hide();
@@ -546,6 +551,18 @@ $("#findMeAPlace").on("click", function() {
                     $("#favorite").attr("dataCuisine", oneRestaurantPick[0].restaurant.cuisines);
                     $("#favorite").attr("dataMenu", oneRestaurantPick[0].restaurant.menu_url);
 
+                    //checking to see if favorite already exists
+                    for (x=0; x<favoritesLocal.length; x++){
+                        if (oneRestaurantPick[0].restaurant.id == favoritesLocal[x].restID) {
+
+                            console.log("Restaurant already a favorite");
+
+                            $("#favorite").addClass("favorited");
+                            $('#favorite').attr("dataValue", favorites[x].dataIndex);
+                            
+                        }
+                    }
+
                 };
                 
                 writeRestaurantToCard (oneRestaurantPick);
@@ -574,35 +591,43 @@ $(document).on("click", "#favorite", function() {
             var favMenu = $(this).attr("dataMenu");
             var favPrice = $(this).attr("dataPrice");
 
-            var favIndex = favoritesLocal.length;
+            // favoritesLocal = globalUID.favoritesListDB;
+
+            globalUID.once("value", function(snapshot){
+
+                favoritesLocal = snapshot.val().favoritesListDB;
+
+                console.log("favoritesLocal after getting GUID: " + favoritesLocal);
+
+                var favIndex = favoritesLocal.length;
             
+                var favoritesObj = {};
+    
+                favoritesObj['restID'] = favValue;
+                favoritesObj['restName'] = favName;
+                favoritesObj['restAddress'] = favAddress;
+                favoritesObj['restCuisine'] = favCuisine;
+                favoritesObj['restMenu'] = favMenu;
+                favoritesObj['restPrice'] = favPrice;
+                favoritesObj['dataIndex'] = favIndex;
+    
+                console.log('FavoritesOBJ: ' + favoritesObj);
+    
+                console.log("favoritesLocal: " + favoritesLocal);
+                console.log("favoritesLocal after parse: " + JSON.parse(favoritesLocal));
 
-            
-            var favoritesObj = {};
+    
+                favoritesLocal.push(favoritesObj);
+    
+                console.log("favoritesLocal after push: " + favoritesLocal);
+    
+                globalUID.update({
+                    favoritesListDB: favoritesLocal,
+                });
+                
+                $(this).attr("dataIndex", favIndex);
 
-            favoritesObj['restID'] = favValue;
-            favoritesObj['restName'] = favName;
-            favoritesObj['restAddress'] = favAddress;
-            favoritesObj['restCuisine'] = favCuisine;
-            favoritesObj['restMenu'] = favMenu;
-            favoritesObj['restPrice'] = favPrice;
-            favoritesObj['dataIndex'] = favIndex;
-
-            console.log('FavoritesOBJ: ' + favoritesObj);
-
-            console.log("favoritesLocal: " + favoritesLocal);
-
-            favoritesLocal.push(favoritesObj);
-
-            console.log("favoritesLocal after push: " + favoritesLocal);
-
-
-
-            globalUID.update({
-                favoritesListDB: favoritesLocal,
             });
-            
-            $(this).attr("dataIndex", favIndex);
             
         } else {
             console.log ("trying to remove favorite");
@@ -645,22 +670,23 @@ $(document).on("click", "#favorite", function() {
 //database listener for favorites list
 
 
-$(globalUID).on("value", function(snapshot) { 
+globalUID.on("value", function(snapshot) { 
 
     console.log("hitting DB listener for favorites");
 
     favoritesLocal == snapshot.val().favoritesListDB;
 
-    // JSON.parse(favoritesLocal);
-
-    // if (!Array.isArray(favoritesLocal)) {
-    //     favoritesLocal = [];
-    // }
+    if (!Array.isArray(favoritesLocal)) {
+        favoritesLocal = [];
+        globalUID.update({
+            favoritesListDB: favoritesLocal,
+        });
+    }
     console.log("favoriteslocal changed by database to: " + favoritesLocal);
 
 
 });
 
 
-
+});
 
