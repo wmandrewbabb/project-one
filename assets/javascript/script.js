@@ -588,9 +588,9 @@ $(document).on("click", "#favorite", function() {
 
             // favoritesLocal = globalUID.favoritesListDB;
 
-            globalUID.getInstance(snapshot).then(function() {
+            globalUID.getInstance().then(function() {
 
-                favoritesLocal = snapshot.val().favoritesListDB;
+                favoritesLocal = globalUID.val().favoritesListDB;
 
                 console.log("favoritesLocal after getting GUID: " + favoritesLocal);
 
