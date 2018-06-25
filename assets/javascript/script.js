@@ -588,7 +588,7 @@ $(document).on("click", "#favorite", function() {
 
             // favoritesLocal = globalUID.favoritesListDB;
 
-            globalUID.getInstance().then(function() {
+            database.getInstance().then(function() {
 
                 favoritesLocal = globalUID.val().favoritesListDB;
 
