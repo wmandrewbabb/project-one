@@ -114,6 +114,12 @@ body {
 
 }
 
+@media screen and (max-width: 575px) {
+    .display-4 {
+        font-size: 2.3rem!important;
+    }
+}
+
   
 #leadStyle {
     background-color: rgba(101, 79, 111, 0.75);
