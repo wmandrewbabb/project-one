@@ -594,6 +594,8 @@ $(document).on("click", "#favorite", function() {
 
                 console.log("favoritesLocal after getting GUID: " + favoritesLocal);
 
+            }).then(function() {
+
                 var favIndex = favoritesLocal.length;
             
                 var favoritesObj = {};
@@ -619,34 +621,6 @@ $(document).on("click", "#favorite", function() {
                 });
                 
                 $(this).attr("dataIndex", favIndex);
-
-            }).then(function() {
-
-                // var favIndex = favoritesLocal.length;
-            
-                // var favoritesObj = {};
-    
-                // favoritesObj['restID'] = favValue;
-                // favoritesObj['restName'] = favName;
-                // favoritesObj['restAddress'] = favAddress;
-                // favoritesObj['restCuisine'] = favCuisine;
-                // favoritesObj['restMenu'] = favMenu;
-                // favoritesObj['restPrice'] = favPrice;
-                // favoritesObj['dataIndex'] = favIndex;
-    
-                // console.log('FavoritesOBJ: ' + favoritesObj);
-    
-                // console.log("favoritesLocal: " + favoritesLocal);
-    
-                // favoritesLocal.push(favoritesObj);
-    
-                // console.log("favoritesLocal after push: " + favoritesLocal);
-    
-                // globalUID.update({
-                //     favoritesListDB: favoritesLocal,
-                // });
-                
-                // $(this).attr("dataIndex", favIndex);
 
             });
             
@@ -697,7 +671,8 @@ $(globalUID).on("value", function(snapshot) {
 
     favoritesLocal == snapshot.val().favoritesListDB;
 
-    // JSON.parse(favoritesLocal);
+
+    console.log("favoritesLocal after parse: " + JSON.parse(favoritesLocal));
 
     if (!Array.isArray(favoritesLocal)) {
         favoritesLocal = [];
