@@ -91,10 +91,19 @@ if (user) {
         console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
         var userRef = firebase.database().ref("users/" + uid);
         globalUID = userRef;
-        favoritesLocal = globalUID.val().favoritesListDB;
+
+        favoritesLocal = userRef.val().favoritesListDB;
+        
+        if (!Array.isArray(favoritesLocal)) {
+        favoritesLocal = [];
+        globalUID.push({
+            favoritesListDB: favoritesLocal,
+        });
+    }
+
         console.log("globalUID" + globalUID);
             
-            if (!userRef.firstLogin) {
+            if (!userRef.val().firstLogin) {
                 console.log("First Login");
                  userRef.update({
                     name: name,
