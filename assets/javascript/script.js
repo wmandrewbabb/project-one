@@ -1,11 +1,11 @@
 var config = {
-    apiKey: "AIzaSyDIJxOczwNeRzwdUa96kJDtO0AQ48hX8m0",
-    authDomain: "dungeonsanddinners.firebaseapp.com",
-    databaseURL: "https://dungeonsanddinners.firebaseio.com",
-    projectId: "dungeonsanddinners",
-    storageBucket: "dungeonsanddinners.appspot.com",
-    messagingSenderId: "395732337799"
-  };
+    apiKey: "AIzaSyBcV1kqAcsyalZDr6rPk6N6w2Ptt72Nwa4",
+    authDomain: "loginuserauthtest.firebaseapp.com",
+    databaseURL: "https://loginuserauthtest.firebaseio.com",
+    projectId: "loginuserauthtest",
+    storageBucket: "",
+    messagingSenderId: "440397246299"
+};
 
 firebase.initializeApp(config);
 
