@@ -87,7 +87,7 @@ if (user) {
                         // you have one. Use User.getToken() instead.
         console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
         var userRef = firebase.database().ref("users/" + uid);
-        globalUID = userRef;
+        globalUID = uid;
         console.log("globalUID" + globalUID);
             
             if (!userRef.firstLogin) {
@@ -577,6 +577,8 @@ $(document).on("click", "#favorite", function() {
 
         if (!$(this).hasClass("favorited")) {
 
+            globalUIDref = firebase.database().ref("users/" + globalUID);
+
             $(this).addClass("favorited");
             var favValue =  $(this).attr("dataValue");
             var favName = $(this).attr("dataName");
@@ -585,9 +587,9 @@ $(document).on("click", "#favorite", function() {
             var favMenu = $(this).attr("dataMenu");
             var favPrice = $(this).attr("dataPrice");
 
-            favoritesLocal = firebase.database().ref("users/" + uid).favoritesListDB;
+            favoritesLocal = globalUIDref.favoritesListDB;
 
-            console.log(favoritesLocal);
+            console.log("favorites from db: " + favoritesLocal);
 
             var favIndex = favoritesLocal.length;
             
@@ -613,9 +615,16 @@ $(document).on("click", "#favorite", function() {
 
 
 
-            globalUID.update({
+            globalUIDref.update({
                 favoritesListDB: favoritesLocal,
             });
+
+            if (!Array.isArray(favoritesLocal)) {
+                favoritesLocal = [];
+                globalUIDref.push({
+                    favoritesListDB: favoritesLocal,
+                });
+            }
             
             $(this).attr("dataIndex", favIndex);
             
@@ -638,7 +647,7 @@ $(document).on("click", "#favorite", function() {
 
             console.log("favorites after removal: " + favoritesLocal); 
         
-            globalUID.update({
+            globalUIDref.update({
                 favoritesListDB: favoritesLocal,
             });
 
@@ -660,21 +669,21 @@ $(document).on("click", "#favorite", function() {
 //database listener for favorites list
 
 
-$(globalUID).on("value", function(snapshot) { 
+// globalUID.on("value", function(snapshot) { 
 
-    console.log("hitting DB listener for favorites");
+//     console.log("hitting DB listener for favorites");
 
-    favoritesLocal == snapshot.val().favoritesListDB;
+//     favoritesLocal == snapshot.val().favoritesListDB;
 
-    // JSON.parse(favoritesLocal);
+//     // JSON.parse(favoritesLocal);
 
-    // if (!Array.isArray(favoritesLocal)) {
-    //     favoritesLocal = [];
-    // }
-    console.log("favoriteslocal changed by database to: " + favoritesLocal);
+//     // if (!Array.isArray(favoritesLocal)) {
+//     //     favoritesLocal = [];
+//     // }
+//     console.log("favoriteslocal changed by database to: " + favoritesLocal);
 
 
-});
+// });
 
 
 
