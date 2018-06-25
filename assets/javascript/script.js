@@ -16,7 +16,7 @@ var provider = new firebase.auth.GoogleAuthProvider();
 var globalUID = ""; 
 var userLoggedIn = false;
 var favoritesShowing = false;
-var favoritesLocal = []; 
+var favoritesLocal =  
 
 $("#loginHere").on("click", function(event) {
 
@@ -574,9 +574,10 @@ $(document).on("click", "#favorite", function() {
             var favMenu = $(this).attr("dataMenu");
             var favPrice = $(this).attr("dataPrice");
 
-            var favIndex = favoritesLocal.length;
-            
+            favoritesLocal = globalUID.favoritesListDB;
+            console.log("favoritesLocal after getting GUID: " + favoritesLocal);
 
+            var favIndex = favoritesLocal.length;
             
             var favoritesObj = {};
 
