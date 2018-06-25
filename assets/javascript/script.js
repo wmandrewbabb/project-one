@@ -594,8 +594,6 @@ $(document).on("click", "#favorite", function() {
 
                 console.log("favoritesLocal after getting GUID: " + favoritesLocal);
 
-            }).then(function() {
-
                 var favIndex = favoritesLocal.length;
             
                 var favoritesObj = {};
