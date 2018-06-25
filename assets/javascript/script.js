@@ -611,6 +611,8 @@ $(document).on("click", "#favorite", function() {
                 console.log('FavoritesOBJ: ' + favoritesObj);
     
                 console.log("favoritesLocal: " + favoritesLocal);
+                console.log("favoritesLocal after parse: " + JSON.parse(favoritesLocal));
+
     
                 favoritesLocal.push(favoritesObj);
     
