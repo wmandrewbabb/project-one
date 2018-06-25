@@ -49,50 +49,50 @@ $("#loginHere").on("click", function(event) {
 });
 
 $("#signOutButton").on("click", function(event) {
+    console.log("signout clicked");
 
-console.log("signout clicked");
+    userLoggedIn = false;
 
-userLoggedIn = false;
-
-firebase.auth().signOut().then(function() {
-    console.log("Signed-out"); //Sign-out successful.
-}).catch(function(error) {
-    console.log("Error trying to sign out"); // An error happened.
-});
-
+    firebase.auth().signOut().then(function() {
+        console.log("Signed-out"); //Sign-out successful.
+    }).catch(function(error) {
+        console.log("Error trying to sign out"); // An error happened.
+    });
 });
 
 firebase.auth().onAuthStateChanged(function(user) {
 
-if (user) {
+    if (user) {
 
-    var user = firebase.auth().currentUser;
-    var name, email, photoUrl, uid, emailVerified;
+        var user = firebase.auth().currentUser;
+        var name, email, photoUrl, uid, emailVerified;
 
-    console.log("seeing user");
-    // photoUrl = "blank";
+        console.log("seeing user");
+        // photoUrl = "blank";
 
-    if (user != null) {
+        if (user != null) {
 
-        console.log("seeing user variables");
+            console.log("seeing user variables");
 
-        userLoggedIn = true; //favorite toggler
+            userLoggedIn = true; //favorite toggler
 
-        name = user.displayName;
-        email = user.email;
-        photoUrl = user.photoURL;
-        emailVerified = user.emailVerified;
-        uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-                        // this value to authenticate with your backend server, if
-                        // you have one. Use User.getToken() instead.
-        console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
-        var userRef = firebase.database().ref("users/" + uid);
-        globalUID = userRef;
-        console.log("globalUID" + globalUID);
+            name = user.displayName;
+            email = user.email;
+            photoUrl = user.photoURL;
+            emailVerified = user.emailVerified;
+            uid = user.uid;  
             
+            // The user's ID, unique to the Firebase project. Do NOT use
+            // this value to authenticate with your backend server, if
+            // you have one. Use User.getToken() instead.
+            console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
+            var userRef = firebase.database().ref("users/" + uid);
+            globalUID = userRef;
+            console.log("globalUID" + globalUID);
+                
             if (!userRef.firstLogin) {
                 console.log("First Login");
-                 userRef.update({
+                    userRef.update({
                     name: name,
                     email: email,
                     userid: uid,
@@ -100,25 +100,40 @@ if (user) {
                 });
             }
 
+            
+                //database listener for favorites list
 
-        $('#userLoggedIn').show();
-        $('#signOutButton').show();
-        $('#loggedInUser').html('<i class="fas fa-user-circle"></i> ' + email);
-        $("#loginHere").hide();
 
+                userRef.on("value", function(snapshot) { 
+
+                    console.log("hitting DB listener for favorites");
+
+                    favoritesLocal == snapshot.val().favoritesListDB;
+
+                    // JSON.parse(favoritesLocal);
+
+                    // if (!Array.isArray(favoritesLocal)) {
+                    //     favoritesLocal = [];
+                    // }
+                    console.log("favoriteslocal changed by database to: " + favoritesLocal);
+
+
+                });
+
+
+            $('#userLoggedIn').show();
+            $('#signOutButton').show();
+            $('#loggedInUser').html('<i class="fas fa-user-circle"></i> ' + email);
+            $("#loginHere").hide();
+
+        }
+    } else {
+
+            $("#loginHere").show();
+            $('#loggedInUser').html('');
+            $("#userLoggedIn").hide();
+            $("#signOutButton").hide();
     }
-
-
-    // User is signed in.
-} else {
-
-        $("#loginHere").show();
-        $('#loggedInUser').html('');
-        $("#userLoggedIn").hide();
-        $("#signOutButton").hide();
-
-    // No user is signed in.
-}
 });
 
 
@@ -587,9 +602,6 @@ $(document).on("click", "#favorite", function() {
             var favPrice = $(this).attr("dataPrice");
 
             var favIndex = favoritesLocal.length;
-            
-
-            
             var favoritesObj = {};
 
             favoritesObj['restID'] = favValue;
@@ -607,8 +619,6 @@ $(document).on("click", "#favorite", function() {
             favoritesLocal.push(favoritesObj);
 
             console.log("favoritesLocal after push: " + favoritesLocal);
-
-
 
             globalUID.update({
                 favoritesListDB: favoritesLocal,
@@ -630,9 +640,6 @@ $(document).on("click", "#favorite", function() {
             deleteFavorites.splice(currentIndex, 1);
             favoritesLocal = deleteFavorites;
 
-
-
-
             console.log("favorites after removal: " + favoritesLocal); 
         
             globalUID.update({
@@ -651,25 +658,6 @@ $(document).on("click", "#favorite", function() {
     } else {
         console.log("user must be signed in for favorites");
     }
-
-});
-
-//database listener for favorites list
-
-
-$(globalUID).on("value", function(snapshot) { 
-
-    console.log("hitting DB listener for favorites");
-
-    favoritesLocal == snapshot.val().favoritesListDB;
-
-    // JSON.parse(favoritesLocal);
-
-    // if (!Array.isArray(favoritesLocal)) {
-    //     favoritesLocal = [];
-    // }
-    console.log("favoriteslocal changed by database to: " + favoritesLocal);
-
 
 });
 
