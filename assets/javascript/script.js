@@ -585,7 +585,7 @@ $(document).on("click", "#favorite", function() {
             var favMenu = $(this).attr("dataMenu");
             var favPrice = $(this).attr("dataPrice");
 
-            favoritesLocal = firebase.database().ref("users/" + uid).val().favoritesListDB;
+            favoritesLocal = firebase.database().ref("users/" + uid).favoritesListDB;
 
             var favIndex = favoritesLocal.length;
             
