@@ -588,13 +588,11 @@ $(document).on("click", "#favorite", function() {
 
             // favoritesLocal = globalUID.favoritesListDB;
 
-            database.getInstance().then(function() {
+            globalUID.once("value", function(snapshot){
 
-                favoritesLocal = globalUID.val().favoritesListDB;
+                favoritesLocal = snapshot.val().favoritesListDB;
 
                 console.log("favoritesLocal after getting GUID: " + favoritesLocal);
-
-            }).then(function() {
 
                 var favIndex = favoritesLocal.length;
             
@@ -621,6 +619,34 @@ $(document).on("click", "#favorite", function() {
                 });
                 
                 $(this).attr("dataIndex", favIndex);
+
+            }).then(function() {
+
+                // var favIndex = favoritesLocal.length;
+            
+                // var favoritesObj = {};
+    
+                // favoritesObj['restID'] = favValue;
+                // favoritesObj['restName'] = favName;
+                // favoritesObj['restAddress'] = favAddress;
+                // favoritesObj['restCuisine'] = favCuisine;
+                // favoritesObj['restMenu'] = favMenu;
+                // favoritesObj['restPrice'] = favPrice;
+                // favoritesObj['dataIndex'] = favIndex;
+    
+                // console.log('FavoritesOBJ: ' + favoritesObj);
+    
+                // console.log("favoritesLocal: " + favoritesLocal);
+    
+                // favoritesLocal.push(favoritesObj);
+    
+                // console.log("favoritesLocal after push: " + favoritesLocal);
+    
+                // globalUID.update({
+                //     favoritesListDB: favoritesLocal,
+                // });
+                
+                // $(this).attr("dataIndex", favIndex);
 
             });
             
