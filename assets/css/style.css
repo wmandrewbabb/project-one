@@ -1,3 +1,12 @@
+.col-centered {
+    float: none;
+    margin: auto;
+}
+
+.text-centered {
+    text-align: center;
+}
+
 /*
 font-family: 'Open Sans', sans-serif;
 font-family: 'Oswald', sans-serif;
@@ -99,16 +108,28 @@ body {
     size: 200%;
 }
 
+#userRating {
+    background-color: red;
+}
+
 #mainVenuePic {
     max-width: 300px;
     min-width: 300px;
     height: auto;
     min-height: 25px;
     background: gray;
+    display: none;
 }
 
 #favorite {
     opacity: .8;
+}
+
+.favorited {
+    opacity: 1;
+    color: orange;
+    stroke-width: 1px;
+    -webkit-text-stroke-color: white;
 }
 
 #mainRestaurantName {

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Project 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/scripts/reset.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald|UnifrakturCook:700" rel="stylesheet">
+  <link rel="stylesheet" href="assets/scripts/style.css">  
+</head>
+
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">   </a>              
+                <div class="navbar-nav navbar-right ml-auto justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav navbar-right">
+                    <li class="nav-item active">
+                        <a class="nav-link ml-auto" id="loginHere" href="#"><i class="fas fa-user-plus"></i> Login<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item" id="userLoggedIn">
+                        <a class="nav-link" id="loggedInUser" href="#"><i class="fas fa-user-circle"></i>Logged In User</a>
+                    </li>
+                    <li class="nav-item" id="signOutButton">
+                        <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i></a>
+                    </li>
+                  </ul>
+                </div>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <div class="jumbotron jumbotron-fluid">
+                        <div class="container">
+                            <h1 class="display-4">Dungeons </h1><h1 class="display-4" id="getTheeOnTop"> and Dinners</h1>
+                            <p class="lead" id="leadStyle">Slay indecisive dining, find local food you haven't tried.</p>
+                        </div>
+                    </div>
+                </div>
+                    <div class="row">
+                            <div class="input-group mb-3 col-lg-4 col-md-6 col-xs-12">
+                                <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cuisines</button>
+                                <div class="dropdown-menu" id="eatDrop" >
+                                    <a class="dropdown-item" href="#"><span>Italian</span></a>
+                                    <a class="dropdown-item" href="#"><span>Mexican</span></a>
+                                    <a class="dropdown-item" href="#"><span>Chinese</span></a>
+                                    <a class="dropdown-item" href="#"><span>American</span></a>
+                                    <a class="dropdown-item" href="#"><span>Pizza</span></a>
+                                    <a class="dropdown-item" href="#"><span>Burgers</span></a>
+                                    <a class="dropdown-item" href="#"><span>Japanese</span></a>
+                                    <a class="dropdown-item" href="#"><span>Seafood</span></a>
+                                    <a class="dropdown-item" href="#"><span>Vegetarian</span></a>
+                                    <a class="dropdown-item" href="#"><span>Bar</span></a>
+                                    <a class="dropdown-item" href="#"><span>BBQ</span></a>
+                                    <a class="dropdown-item" href="#"><span>Indian</span></a>
+                                </div>
+                                </div>
+                                <input type="text" class="form-control" id="quisineType" placeholder="Surprise Me" aria-label="Text input with dropdown button">
+                            </div>
+                            <div class="input-group mb-3 col-lg-4 col-md-6 col-xs-12">
+                                <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cost</button>
+                                <div class="dropdown-menu" id="priceDrop" >
+                                    <a class="dropdown-item" href="#"><span>Cheap</span></a>
+                                    <a class="dropdown-item" href="#"><span>Moderate</span></a>
+                                    <a class="dropdown-item" href="#"><span>A Good Time</span></a>
+                                    <a class="dropdown-item" href="#"><span>A REALLY Good Time</span></a>
+                                </div>
+                                </div>
+                                <input class="form-control" id="priceType" placeholder="----" aria-label="Text input with dropdown button">
+                            </div>
+                            <div class="input-group mb-3 col-lg-4 col-md-6 col-xs-12">
+                                <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Distance</button>
+                                <div class="dropdown-menu" id="rangeDrop" >
+                                    <a class="dropdown-item" href="#"><span>A few minutes away</span></a>
+                                    <a class="dropdown-item" href="#"><span>A short drive</span></a>
+                                    <a class="dropdown-item" href="#"><span>Somewhere in town</span></a>
+                                    <a class="dropdown-item" href="#"><span>A half hour or more</span></a>
+                                </div>
+                                </div>
+                                <input class="form-control" id="rangeType" placeholder="--" aria-label="Text input with dropdown button">
+                            </div>
+                        </div>
+                <div class="row">
+                    <div id="findMeAPlace">Find me a place to eat! <i id="3x" class="fas fa-dice"></i></div>
+                </div>
+                <div class="row" id="noResults">
+                    <div id="noResultsBox">No Results found for that Input!</div>
+                </div>
+                <br>    
+                <div class="row d-flex justify-content-center" id="mainRandomResult">
+                    <div class="w-75 card">
+                        <div class="card-header text-right">
+                            <span class="text-right"></span><i class="fas fa-star" id="favorite" dataValue="restaurantID"></i></div>
+                        <div class="card-body">
+                            <h5 class="card-title" id="mainRestaurantName">Restaurant Name</h5>
+                            <small class="text-muted" id="mainAddress">1000 W. Broad Street, Richmond VA 23220</small> • <small class="text-muted" id="mainCuisineType">Italian, BBQ</small> • <small class="text-muted" main="mainPriceResult">$$$</small>
+                            <br><img id="mainVenuePic" src="">
+                            <p class="card-text" id="mainVenueDescription">With supporting text below as a natural lead-in to additional content.</p>
+                        </div>
+                        <div class="card-footer text-right">
+                            <small class="btn btn-primary">Get Directions <span class="ml-auto"><i class="fas fa-map"></i></small>
+                            <small class="btn btn-info">Reroll <span class="ml-auto"><i class="fas fa-dice"></i></small>                                </span>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    
+
+    <script type="text/javascript">
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyBcV1kqAcsyalZDr6rPk6N6w2Ptt72Nwa4",
+            authDomain: "loginuserauthtest.firebaseapp.com",
+            databaseURL: "https://loginuserauthtest.firebaseio.com",
+            projectId: "loginuserauthtest",
+            storageBucket: "",
+            messagingSenderId: "440397246299"
+        };
+        
+        firebase.initializeApp(config);
+
+        var database = firebase.database();
+        var provider = new firebase.auth.GoogleAuthProvider();
+
+        $("#loginHere").on("click", function(event) {
+
+                console.log("login clicked");
+
+                firebase.auth().signInWithPopup(provider).then(function(result) {
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    var token = result.credential.accessToken;
+                    // The signed-in user info.
+                    var user = result.user;
+                    console.log("user: " + user.name);
+                    console.log("email: " + user.email);
+                    // ...
+                    console.log("userID: " + user.userid);
+                    console.log("userToken: " + token);
+                }).catch(function(error) {
+
+                    console.log("hitting error");
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    console.log("errorcode: " + errorCode + " errormessage: " + errorMessage + " email: " + email + " credential: " + credential);
+                    // ...
+                });
+
+        });
+
+        $("#signOutButton").on("click", function(event) {
+
+            console.log("signout clicked");
+
+            firebase.auth().signOut().then(function() {
+                console.log("Signed-out"); //Sign-out successful.
+            }).catch(function(error) {
+                console.log("Error trying to sign out"); // An error happened.
+            });
+
+        });
+
+        // $("#findMeAPlace").on("click", function(event) {
+
+
+
+        // });
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+
+                var user = firebase.auth().currentUser;
+                var name, email, photoUrl, uid, emailVerified;
+                // photoUrl = "blank";
+
+                if (user != null) {
+
+                    name = user.displayName;
+                    email = user.email;
+                    photoUrl = user.photoURL;
+                    emailVerified = user.emailVerified;
+                    uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+                                    // this value to authenticate with your backend server, if
+                                    // you have one. Use User.getToken() instead.
+                    console.log("name: " + name + " email: " + email + " photoUrl: " + photoUrl + " verified: " + emailVerified + " uid: " + uid );
+                    var userRef = firebase.database().ref("users/" + uid)
+                        
+                        if (!userRef.firstLogin) {
+                             userRef.update({
+                                name: name,
+                                email: email,
+                                characterName: "PizzaEater",
+                                userid: uid,
+                                firstLogin: false,
+                                currentXP: 0,
+                                toNextLevel: 100,
+                                currentLevel: 1,
+                                currentClass: 'Trainee',
+                                lastLogin: '06062018',
+                                questTimer: 000000,
+                                characterWealth: "1",
+                                characterFortitude: "10",
+                                characterMind: "10",
+                                characterStrength: "10",
+                            });
+                        }
+
+
+                    $('#userLoggedIn').show();
+                    $('#signOutButton').show();
+                    $('#loggedInUser').html('<i class="fas fa-user-circle"></i> ' + email);
+                    $("#loginHere").hide();
+
+                }
+
+
+                // User is signed in.
+            } else {
+
+                    $("#loginHere").show();
+                    $('#loggedInUser').html('');
+                    $("#userLoggedIn").hide();
+                    $("#signOutButton").hide();
+
+                // No user is signed in.
+            }
+        });
+
+
+        $(document).on('click', '#eatDrop a', function() {
+            var poodle = $(this).children('span').text();
+            $('#quisineType').val(poodle);
+            console.log(this);
+            console.log($(this).children('span').text());
+        });
+
+        $(document).on('click', '#priceDrop a', function() {
+            var poodle = $(this).children('span').text();
+            $('#priceType').val(poodle);
+            console.log(this);
+            console.log($(this).children('span').text());
+        });
+
+        $(document).on('click', '#rangeDrop a', function() {
+            var poodle = $(this).children('span').text();
+            $('#rangeType').val(poodle);
+            console.log(this);
+            console.log($(this).children('span').text());
+        });
+
+
+        // jQuery.validator.addMethod("zipcode", function(value, element) {
+        //     return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
+        // }, "Please provide a valid zipcode.");
+
+        // $().ready(function () {
+
+
+        // $("#zipInput").validate({
+        //     rules: {
+        //         'Address.PostalCode': {
+        //             required: true,
+        //             zipcode: true,
+        //         },
+        //     },
+        //     messages: {
+        //         'Address.PostaleCode' : 'Enter a Valid ZIP'
+        //         }
+        // });
+        
+
+
+        // });
+    </script>
+
+</body>
