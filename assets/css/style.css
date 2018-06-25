@@ -201,6 +201,9 @@ body {
     opacity: .8;
 }
 
+.favorited {
+    color: orange;
+}
 #mainRestaurantName {
     margin-bottom: -4px!important;
 }
