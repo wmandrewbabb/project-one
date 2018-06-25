@@ -22,6 +22,10 @@ body {
     display: none;
 }
 
+.nav-link {
+    display: inline!important;
+}
+
 
 .navbar {
     background-color: var(--emphasiscolor)!important;
