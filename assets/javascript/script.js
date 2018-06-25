@@ -1,3 +1,6 @@
+$(document).ready(function() {
+
+
 var config = {
     apiKey: "AIzaSyBcV1kqAcsyalZDr6rPk6N6w2Ptt72Nwa4",
     authDomain: "loginuserauthtest.firebaseapp.com",
@@ -683,5 +686,5 @@ globalUID.on("value", function(snapshot) {
 });
 
 
-
+});
 
