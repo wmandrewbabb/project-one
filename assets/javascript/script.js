@@ -587,6 +587,8 @@ $(document).on("click", "#favorite", function() {
 
             favoritesLocal = firebase.database().ref("users/" + uid).favoritesListDB;
 
+            console.log(favoritesLocal);
+
             var favIndex = favoritesLocal.length;
             
 
