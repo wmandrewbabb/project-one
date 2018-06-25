@@ -101,8 +101,8 @@ if (user) {
             }
 
 
-        $('#userLoggedIn').show();
-        $('#signOutButton').show();
+        $('#userLoggedIn').css('display','inline');
+        $('#signOutButton').css('display','inline');
         $('#loggedInUser').html('<i class="fas fa-user-circle"></i> ' + email);
         $("#loginHere").hide();
 
@@ -112,7 +112,7 @@ if (user) {
     // User is signed in.
 } else {
 
-        $("#loginHere").show();
+        $("#loginHere").css('display','inline');
         $('#loggedInUser').html('');
         $("#userLoggedIn").hide();
         $("#signOutButton").hide();
