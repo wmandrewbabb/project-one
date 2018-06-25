@@ -673,9 +673,9 @@ $(globalUID).on("value", function(snapshot) {
 
     // JSON.parse(favoritesLocal);
 
-    // if (!Array.isArray(favoritesLocal)) {
-    //     favoritesLocal = [];
-    // }
+    if (!Array.isArray(favoritesLocal)) {
+        favoritesLocal = [];
+    }
     console.log("favoriteslocal changed by database to: " + favoritesLocal);
 
 
