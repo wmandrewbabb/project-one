@@ -586,36 +586,43 @@ $(document).on("click", "#favorite", function() {
             var favMenu = $(this).attr("dataMenu");
             var favPrice = $(this).attr("dataPrice");
 
-            favoritesLocal = globalUID.favoritesListDB;
-            console.log("favoritesLocal after getting GUID: " + favoritesLocal);
+            // favoritesLocal = globalUID.favoritesListDB;
 
-            var favIndex = favoritesLocal.length;
+            globalUID.once("value", function(snapshot){
+
+                favoritesLocal = snapshot.favoritesListDB;
+
+                console.log("favoritesLocal after getting GUID: " + favoritesLocal);
+
+            }).then(function() {
+
+                var favIndex = favoritesLocal.length;
             
-            var favoritesObj = {};
+                var favoritesObj = {};
+    
+                favoritesObj['restID'] = favValue;
+                favoritesObj['restName'] = favName;
+                favoritesObj['restAddress'] = favAddress;
+                favoritesObj['restCuisine'] = favCuisine;
+                favoritesObj['restMenu'] = favMenu;
+                favoritesObj['restPrice'] = favPrice;
+                favoritesObj['dataIndex'] = favIndex;
+    
+                console.log('FavoritesOBJ: ' + favoritesObj);
+    
+                console.log("favoritesLocal: " + favoritesLocal);
+    
+                favoritesLocal.push(favoritesObj);
+    
+                console.log("favoritesLocal after push: " + favoritesLocal);
+    
+                globalUID.update({
+                    favoritesListDB: favoritesLocal,
+                });
+                
+                $(this).attr("dataIndex", favIndex);
 
-            favoritesObj['restID'] = favValue;
-            favoritesObj['restName'] = favName;
-            favoritesObj['restAddress'] = favAddress;
-            favoritesObj['restCuisine'] = favCuisine;
-            favoritesObj['restMenu'] = favMenu;
-            favoritesObj['restPrice'] = favPrice;
-            favoritesObj['dataIndex'] = favIndex;
-
-            console.log('FavoritesOBJ: ' + favoritesObj);
-
-            console.log("favoritesLocal: " + favoritesLocal);
-
-            favoritesLocal.push(favoritesObj);
-
-            console.log("favoritesLocal after push: " + favoritesLocal);
-
-
-
-            globalUID.update({
-                favoritesListDB: favoritesLocal,
             });
-            
-            $(this).attr("dataIndex", favIndex);
             
         } else {
             console.log ("trying to remove favorite");
