@@ -565,10 +565,10 @@ $("#findMeAPlace").on("click", function() {
                                         for (x=0; x<favoritesLocal.length; x++){
                                             if (oneRestaurantPick[0].restaurant.id == favoritesLocal[x].restID) {
                     
-                                                console.log("Restaurant already a favorite");
+                                                console.log("Restaurant already a favorite at index: " + favoritesLocal[x].dataIndex);
                     
                                                 $("#favorite").addClass("favorited");
-                                                $('#favorite').attr("dataValue", favoritesLocal[x].dataIndex);
+                                                $('#favorite').attr("dataIndex", favoritesLocal[x].dataIndex);
                                                 
                                             }
                                         }
