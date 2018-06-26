@@ -561,17 +561,17 @@ $("#findMeAPlace").on("click", function() {
                     $("#favorite").attr("dataCuisine", oneRestaurantPick[0].restaurant.cuisines);
                     $("#favorite").attr("dataMenu", oneRestaurantPick[0].restaurant.menu_url);
 
-                                        // //checking to see if favorite already exists
-                                        // for (x=0; x<favoritesLocal.length; x++){
-                                        //     if (oneRestaurantPick[0].restaurant.id == favoritesLocal[x].restID) {
+                                        //checking to see if favorite already exists
+                                        for (x=0; x<favoritesLocal.length; x++){
+                                            if (oneRestaurantPick[0].restaurant.id == favoritesLocal[x].restID) {
                     
-                                        //         console.log("Restaurant already a favorite");
+                                                console.log("Restaurant already a favorite");
                     
-                                        //         $("#favorite").addClass("favorited");
-                                        //         $('#favorite').attr("dataValue", favorites[x].dataIndex);
+                                                $("#favorite").addClass("favorited");
+                                                $('#favorite').attr("dataValue", favoritesLocal[x].dataIndex);
                                                 
-                                        //     }
-                                        // }
+                                            }
+                                        }
 
                 };
                 
@@ -641,6 +641,11 @@ $(document).on("click", "#favorite", function() {
             favoritesLocal = deleteFavorites;
 
             console.log("favorites after removal: " + favoritesLocal); 
+
+            //fixing our data Indexes so they're accurate
+            for (x=0; x<favoritesLocal; x++){
+                favoritesLocal[x].dataIndex = x;
+            }
         
             globalUID.update({
                 favoritesListDB: favoritesLocal,
