@@ -108,7 +108,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
                     console.log("hitting DB listener for favorites");
 
-                    favoritesLocal == snapshot.val().favoritesListDB;
+                    favoritesLocal = snapshot.val().favoritesListDB;
 
                     console.log(favoritesLocal);
 
