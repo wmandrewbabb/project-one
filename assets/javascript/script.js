@@ -110,7 +110,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
                     favoritesLocal == snapshot.val().favoritesListDB;
 
-                    // JSON.parse(favoritesLocal);
+                    console.log("favoritesLocal from DB " + JSON.parse(favoritesLocal));
 
                     if (!Array.isArray(favoritesLocal)) {
                         favoritesLocal = [];
