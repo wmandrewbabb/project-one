@@ -643,8 +643,10 @@ $(document).on("click", "#favorite", function() {
             console.log("favorites after removal: " + favoritesLocal); 
 
             //fixing our data Indexes so they're accurate
-            for (x=0; x<favoritesLocal; x++){
+            for ( x=0; x<favoritesLocal.length; x++ ){
+
                 favoritesLocal[x].dataIndex = x;
+
             }
         
             globalUID.update({
